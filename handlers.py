@@ -17,8 +17,8 @@ def start(update, context):
     )
 
 
+
 def forward_to_chat(update, context):
-    update.message.reply_text('Спасибо, «ваш запрос очень важен для нас»🤭\nШутка, наш админ напишет тебе в ближайшее время😎')
     """{ 
         'message_id': 5, 
         'date': 1605106546, 
@@ -33,7 +33,9 @@ def forward_to_chat(update, context):
             reply_to_message_id=forwarded.message_id,
             text=f'{update.message.from_user.id}\n{REPLY_TO_THIS_MESSAGE}'
         )
-
+def reply_bot(update, context):
+    k = update.message.message_id
+    context.bot.send_message(k, text=('Спасибо, «ваш запрос очень важен для нас»🤭\nШутка, наш админ напишет тебе в ближайшее время😎'))
 
 def forward_to_user(update, context):
     """{
