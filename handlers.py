@@ -1,4 +1,5 @@
 import os
+import sqlite3
 from telegram.ext import CommandHandler, MessageHandler, Filters
 
 from settings import WELCOME_MESSAGE, TELEGRAM_SUPPORT_CHAT_ID, REPLY_TO_THIS_MESSAGE, WRONG_REPLY
@@ -34,6 +35,7 @@ def forward_to_chat(update, context):
             reply_to_message_id=forwarded.message_id,
             text=f'{update.message.from_user.id}\n{REPLY_TO_THIS_MESSAGE}'
         )
+
 
 def forward_to_user(update, context):
     """{
