@@ -43,8 +43,7 @@ def create_table(conn, create_table_sql):
 
 
 
-sql_create_users_table = """DROP TABLE bot_users;
-                            CREATE TABLE IF NOT EXISTS bot_users (
+sql_create_users_table = """CREATE TABLE IF NOT EXISTS bot_users (
                                 id integer PRIMARY KEY,
                                 user_id varchar(50),
                                 UNIQUE(user_id)
