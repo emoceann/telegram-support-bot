@@ -59,7 +59,7 @@ def create_user(conn, user):
 
 def select_user(conn, user):
     cur = conn.cursor()
-    cur.execute("SELECT * FROM bot_users WHERE user=?", (user,))
+    cur.execute("SELECT * FROM bot_users WHERE user_id=?", (user,))
 
     rows = cur.fetchone()
 
