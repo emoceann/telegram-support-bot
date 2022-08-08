@@ -21,18 +21,18 @@ def start(update, context):
 
 
 
-
-def create_connection(db_file):
-    """ create a database connection to a SQLite database """
-    conn = None
-    try:
-        conn = sqlite3.connect(db_file)
-        print(sqlite3.version)
-    except Error as e:
-        print(e)
-    finally:
-        if conn:
-            conn.close()
+#
+# def create_connection(db_file):
+#     """ create a database connection to a SQLite database """
+#     conn = None
+#     try:
+#         conn = sqlite3.connect(db_file)
+#         print(sqlite3.version)
+#     except Error as e:
+#         print(e)
+#     finally:
+#         if conn:
+#             conn.close()
 
 def create_table(conn, create_table_sql):
     try:
@@ -59,21 +59,23 @@ def create_user(conn, user):
 
 def select_user(conn, user):
     cur = conn.cursor()
-    cur.execute("SELECT * FROM tasks WHERE user=?", (user,))
+    cur.execute("SELECT * FROM bot_users WHERE user=?", (user,))
 
     rows = cur.fetchone()
 
 
 
-conn = create_connection(r"pythonsqlite.db")
-
+# conn = create_connection(r"pythonsqlite.db")
+#
 
 def forward_to_chat(update, context):
     tg_user = update.message.from_user['id']
+
     try:
         conn = sqlite3.connect(r"pythonsqlite.db")
-        print(sqlite3.version)
         exist = select_user(conn, tg_user)
+        create_user(conn, tg_user)
+
         if exist is None:
             update.message.reply_text(
                 'Спасибо, «ваш запрос очень важен для нас»🤭\nШутка, наш админ напишет тебе в ближайшее время😎')
