@@ -69,7 +69,7 @@ def select_user(conn, user):
 #
 
 def forward_to_chat(update, context):
-    tg_user = update.message.from_user['id']
+    tg_user = int(update.message.from_user['id'])
 
     try:
         conn = sqlite3.connect(r"pythonsqlite.db")
