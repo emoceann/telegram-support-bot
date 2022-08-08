@@ -43,9 +43,10 @@ def create_table(conn, create_table_sql):
 
 
 
-sql_create_users_table = """CREATE TABLE IF NOT EXISTS bot_users (
+sql_create_users_table = """DROP TABLE bot_users;
+                            CREATE TABLE IF NOT EXISTS bot_users (
                                 id integer PRIMARY KEY,
-                                user_id integer,
+                                user_id varchar(50),
                                 UNIQUE(user_id)
                             );"""
 
@@ -69,7 +70,7 @@ def select_user(conn, user):
 #
 
 def forward_to_chat(update, context):
-    tg_user = int(update.message.from_user['id'])
+    tg_user = update.message.from_user['id']
 
     try:
         conn = sqlite3.connect(r"pythonsqlite.db")
