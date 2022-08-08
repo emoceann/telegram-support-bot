@@ -65,22 +65,26 @@ def select_user(conn, user):
 
 
 
-
 conn = create_connection(r"pythonsqlite.db")
 
 
 def forward_to_chat(update, context):
     tg_user = update.message.from_user['id']
+    # global conn
+    # with conn:
+    #     create_table(conn, sql_create_users_table)
+    #
+    #
+    #     exist = select_user(conn, tg_user)
+    #     if exist is None:
+    #         create_user(conn, tg_user)
 
-    with conn:
-        create_table(conn, sql_create_users_table)
+    with conn(
+    ) as connection:
+        with connection.cursor() as cursor:
+            create_table(connection, tg_user)
 
-
-        exist = select_user(conn, tg_user)
-        if exist is None:
-            create_user(conn, tg_user)
-
-
+    exist = select_user(conn, tg_user)
     if exist is None:
         update.message.reply_text(
             'Спасибо, «ваш запрос очень важен для нас»🤭\nШутка, наш админ напишет тебе в ближайшее время😎')
