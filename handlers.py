@@ -79,12 +79,8 @@ def forward_to_chat(update, context):
         exist = select_user(conn, tg_user)
         if exist is None:
             create_user(conn, tg_user)
-
-
-    if exist is None:
-        update.message.reply_text(
+            update.message.reply_text(
             'Спасибо, «ваш запрос очень важен для нас»🤭\nШутка, наш админ напишет тебе в ближайшее время😎')
-        """{ 
             'message_id': 5, 
             'date': 1605106546, 
             'chat': {'id': 49820636, 'type': 'private', 'username': 'danokhlopkov', 'first_name': 'Daniil', 'last_name': 'Okhlopkov'}, 
