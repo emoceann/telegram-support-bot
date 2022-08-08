@@ -53,7 +53,7 @@ def create_user(conn, user):
     sql = ''' INSERT INTO bot_users(user_id)
               VALUES(?) '''
     cur = conn.cursor()
-    cur.execute(sql, user)
+    cur.execute(sql, (user,))
     conn.commit()
     return cur.lastrowid
 
