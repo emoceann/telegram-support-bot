@@ -73,10 +73,14 @@ def forward_to_chat(update, context):
 
     try:
         conn = sqlite3.connect(r"pythonsqlite.db")
+
+        create_table(conn, sql_create_users_table)
+
         exist = select_user(conn, tg_user)
-        create_user(conn, tg_user)
+
 
         if exist is None:
+            create_user(conn, tg_user)
             update.message.reply_text(
                 'Спасибо, «ваш запрос очень важен для нас»🤭\nШутка, наш админ напишет тебе в ближайшее время😎')
             """{ 
