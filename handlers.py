@@ -1,12 +1,14 @@
 import os
 import sqlite3
+
+from telegram import ParseMode
 from telegram.ext import CommandHandler, MessageHandler, Filters
 
 from settings import WELCOME_MESSAGE, TELEGRAM_SUPPORT_CHAT_ID, REPLY_TO_THIS_MESSAGE, WRONG_REPLY
 
 
 def start(update, context):
-    update.message.reply_text(WELCOME_MESSAGE, parse_mode='markdown')
+    update.message.reply_text(WELCOME_MESSAGE, parse_mode=ParseMode.MARKDOWN)
 
     user_info = update.message.from_user.to_dict()
 
